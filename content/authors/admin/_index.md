@@ -12,9 +12,9 @@ last_name: Geary
 # Pronouns (optional)
 pronouns: he/him
 
-# Status emoji
-status:
-  icon: 🚀
+## Status emoji
+#status:
+#  icon: 🚀
 
 # Is this the primary user of the site?
 superuser: true
@@ -50,31 +50,29 @@ interests:
   - Game Theory
 
 education:
-  - area: PhD Computer Science (AI Focus)
-    institution: Stanford University
-    date_start: 2015-09-01
-    date_end: 2019-06-30
-    summary: |
-      Thesis on _Scaling Laws for Neural Language Models_. Supervised by Prof. Andrew Ng. Published 5 papers in NeurIPS and ICML, with 2 best paper awards.
-    button:
-      text: 'Read Thesis'
-      url: 'https://example.com/thesis.pdf'
-  - area: MS Computer Science
-    institution: Carnegie Mellon University
-    date_start: 2013-09-01
-    date_end: 2015-05-31
-    summary: |
-      GPA: 4.0/4.0
+  - area: PhD Machine Learning
+    institution: University of Edinburgh
+    date_start: 2024-06-01
+    date_end: 
+  #  summary: |
+  #    Thesis on _Randomised Classifiers for Strategic Classification_. Supervised by Dr. Henry Gouk.
+  #  button:
+  #    text: 'Read Thesis'
+  #    url: 'https://example.com/thesis.pdf'
+  - area: MPhil Informatics
+    institution: University of Edinburgh
+    date_start: 2021-06-01
+    date_end: 2021-09-01
 
-      Specialized in machine learning and robotics.
-  - area: BS Computer Science
-    institution: MIT
-    date_start: 2009-09-01
-    date_end: 2013-05-31
-    summary: |
-      GPA: 3.9/4.0
-
-      Minored in Mathematics. President of AI Club.
+      Specialised in decision-making in highly interactive environments with a focus on Autonomous Driving. 
+  - area: MSc Artificial Intelligence
+    institution: University of Edinburgh
+    date_start: 2017-09-01
+    date_end: 2016-09-01
+  - area: BA Mathematics
+    institution: Trinity College Dublin
+    date_start: 2016-06-01
+    date_end: 2012-09-01
 
 work:
   - position: Data Scientist
@@ -84,7 +82,7 @@ work:
     date_start: 2021-06-01
     date_end: '2024-06-01'
     summary: |2-
-      Leading research on multimodal AI systems. Contributed to Llama 2 and other open-source models. 50+ citations in 3 years.
+      
 
 # Skills
 # Add your own SVG icons to `assets/media/icons/`
@@ -99,10 +97,6 @@ skills:
         description: ''
         percent: 100
         icon: chart-bar
-      - name: Cloud Computing (AWS/GCP)
-        description: ''
-        percent: 85
-        icon: cloud
   - name: Hobbies
     color: '#eeac02'
     color_border: '#f0bf23'
