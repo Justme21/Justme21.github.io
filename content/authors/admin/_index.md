@@ -64,7 +64,7 @@ education:
     date_start: 2021-06-01
     date_end: 2021-09-01
     summary: |
-      Specialised in decision-making in highly interactive environments with a focus on Autonomous Driving. 
+      Specialised in decision-making in highly interactive environments with a focus on autonomous driving. 
   - area: MSc Artificial Intelligence
     institution: University of Edinburgh
     date_start: 2017-09-01
@@ -80,43 +80,43 @@ work:
     company_url: 'https://ripjar.com'
     company_logo: ''
     date_start: 2021-06-01
-    date_end: '2024-06-01'      
+    date_end: '2024-06-01'
 
 # Skills
 # Add your own SVG icons to `assets/media/icons/`
-skills:
-  - name: Technical Skills
-    items:
-      - name: Python & PyTorch
-        description: ''
-        percent: 95
-        icon: code-bracket
-      - name: Machine Learning
-        description: ''
-        percent: 100
-        icon: chart-bar
-  - name: Hobbies
-    color: '#eeac02'
-    color_border: '#f0bf23'
-    items:
-      - name: Hiking in the Rockies
-        description: ''
-        percent: 80
-        icon: person-simple-walk
-      - name: Building Custom PCs
-        description: ''
-        percent: 90
-        icon: cpu-chip
-      - name: Sci-Fi Reading
-        description: ''
-        percent: 70
-        icon: book-open
+# skills:
+#   - name: Technical Skills
+#     items:
+#       - name: Python & PyTorch
+#         description: ''
+#         percent: 95
+#         icon: code-bracket
+#       - name: Machine Learning
+#         description: ''
+#         percent: 100
+#         icon: chart-bar
+#   - name: Hobbies
+#     color: '#eeac02'
+#     color_border: '#f0bf23'
+#     items:
+#       - name: Hiking in the Rockies
+#         description: ''
+#         percent: 80
+#         icon: person-simple-walk
+#       - name: Building Custom PCs
+#         description: ''
+#         percent: 90
+#         icon: cpu-chip
+#       - name: Sci-Fi Reading
+#         description: ''
+#         percent: 70
+#         icon: book-open
 
-languages:
-  - name: English
-    percent: 100
-  - name: German
-    percent: 50
+# languages:
+#   - name: English
+#     percent: 100
+#   - name: German
+#     percent: 50
 
 # Awards.
 #   Add/remove as many awards below as you like.
@@ -146,4 +146,4 @@ languages:
   #     Recognized for contributions to scaling laws in deep learning.
 ---
 
-Alex Johnson is a Senior AI Research Scientist at Meta AI, where he leads groundbreaking work on large language models and multimodal systems. His research has been published in top conferences like NeurIPS and ICML, with over 10,000 citations. Alex is passionate about pushing the boundaries of AI while ensuring ethical development. Outside of work, he enjoys hiking in the Rockies, building custom PCs, and mentoring the next generation of AI talent.
+I am a PhD student at the University of Edinburgh, supervised by [Henry Gouk](https://www.henrygouk.com). My research is broadly in the area of Strategic Classification. I am currently exploring methods for developing randomised classifiers in strategic settings. I am interested in Game Theory and decision-making methods, and have previously explored the application of game-theoretic techniques to perform decision-making in highly interactive environments with applications in the field of Autonomous Driving.
