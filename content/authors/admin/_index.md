@@ -63,7 +63,7 @@ education:
     institution: University of Edinburgh
     date_start: 2021-06-01
     date_end: 2021-09-01
-
+    summary: |
       Specialised in decision-making in highly interactive environments with a focus on Autonomous Driving. 
   - area: MSc Artificial Intelligence
     institution: University of Edinburgh
@@ -80,9 +80,7 @@ work:
     company_url: 'https://ripjar.com'
     company_logo: ''
     date_start: 2021-06-01
-    date_end: '2024-06-01'
-    summary: |2-
-      
+    date_end: '2024-06-01'      
 
 # Skills
 # Add your own SVG icons to `assets/media/icons/`
