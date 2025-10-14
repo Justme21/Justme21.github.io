@@ -1,0 +1,17 @@
+{{/* Local override of the Hugoblox resume-biography-3 block */}}
+
+{{ define "main" }}
+<section id="biography" class="section">
+  <div class="container">
+    <h1>Biography</h1>
+
+    {{/* Render avatar, if available */}}
+    {{ with .Params.design.avatar }}
+      {{ partial "blocks/components/avatar" (dict "username" $.Params.content.username "size" .size "shape" .shape) }}
+    {{ end }}
+
+    {{/* Render the main content (about text, etc.) */}}
+    {{ .Content }}
+  </div>
+</section>
+{{ end }}
