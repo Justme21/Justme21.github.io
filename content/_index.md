@@ -14,6 +14,7 @@ sections:
       # Choose a user profile to display (a folder name within `content/authors/`)
       title: Biography
       username: admin
+      show_title: true
       text: ''
       # Show a call-to-action button under your biography? (optional)
       button:
