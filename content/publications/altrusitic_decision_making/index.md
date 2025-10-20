@@ -1,5 +1,5 @@
 ---
-title: 'An example conference paper'
+title: 'Altruistic Decision-Making for Autonomous Driving with Sparse Rewards'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
@@ -24,7 +24,7 @@ publishDate: '2017-01-01T00:00:00Z'
 publication_types: ['paper-conference']
 
 # Publication name and optional abbreviated publication name.
-publication: Altruistic Decision-Making for Autonomous Driving with Sparse Rewards
+publication: "RSS 2020: Interaction and Decision-Making in Autonomous-Driving Workshop"
 #publication_short: In *ICW*
 
 abstract: In order to drive effectively, a driver must be aware of how they can expect other vehicles’ behaviour to be affected by their decisions, and also how they are expected to behave by other drivers. One common family of methods for addressing this problem of interaction are those based on Game Theory. Such approaches often make assumptions about leaders and followers in an interaction which can result in conflicts arising when vehicles do not agree on the hierarchy, resulting in sub- optimal behaviour. In this work we define a measurement for the incidence of conflicts, Area of Conflict (AoC), for a given interactive decision-making model. Furthermore, we propose a novel decision-making method that reduces this value compared to an existing approach for incorporating altruistic behaviour. We verify our theoretical analysis empirically using a simulated lane-change scenario.
@@ -33,7 +33,10 @@ abstract: In order to drive effectively, a driver must be aware of how they can 
 #summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
 
 tags:
-  - Autonomous Driving, Decision-making, Interaction, Game Theory
+  - Autonomous Driving
+  - Decision-making
+  - Interaction
+  - Game Theory
 
 # Display this page in the Featured widget?
 featured: true
@@ -47,8 +50,8 @@ hugoblox:
 links:
   - type: pdf
     url: "https://arxiv.org/pdf/2007.07182"
-  #- type: code
-  #  url: https://github.com/HugoBlox/hugo-blox-builder
+  - type: code
+    url: https://github.com/Justme21/Altruistic-Planning
   #- type: dataset
   #  url: https://github.com/HugoBlox/hugo-blox-builder
   #- type: slides
