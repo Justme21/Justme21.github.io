@@ -61,8 +61,8 @@ education:
   #    url: 'https://example.com/thesis.pdf'
   - area: MPhil Informatics
     institution: University of Edinburgh
-    date_start: 2021-06-01
-    date_end: 2021-09-01
+    date_start: 2017-09-01
+    date_end: 2021-06-01
     summary: |
       Specialised in decision-making in highly interactive environments with a focus on autonomous driving. 
   - area: MSc Artificial Intelligence

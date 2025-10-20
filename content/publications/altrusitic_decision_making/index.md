@@ -44,6 +44,7 @@ featured: true
 # Standard identifiers for auto-linking
 hugoblox:
   ids:
+    arxiv: 
     doi: 10.48550/arXiv.2007.07182
 
 # Custom links
