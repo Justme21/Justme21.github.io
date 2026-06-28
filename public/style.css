@@ -510,6 +510,15 @@ img { max-width: 100%; height: auto; display: block; }
   user-select: all;
 }
 
+/* Extra top padding on the standalone publications page to clear the fixed navbar */
+.pub-page-section { padding-top: calc(64px + 3rem); }
+
+/* View all publications link */
+.view-all-wrap {
+  margin-top: 1.75rem;
+  text-align: center;
+}
+
 /* ============================================================
    PROJECTS
    ============================================================ */
@@ -539,17 +548,26 @@ img { max-width: 100%; height: auto; display: block; }
   gap: 0.75rem;
   margin-bottom: 0.65rem;
 }
-.project-title { font-size: 0.975rem; font-weight: 600; line-height: 1.4; flex: 1; }
+.project-title { font-size: 0.975rem; font-weight: 600; line-height: 1.4; flex: 1; color: var(--text); }
 
-.project-gh-link {
+/* Small corner label showing where the card links ("GitHub ↗" or "Visit ↗") */
+.project-dest-label {
+  font-size: 0.72rem;
+  font-weight: 600;
   color: var(--text-muted);
+  white-space: nowrap;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
   transition: color 0.15s;
-  text-decoration: none;
 }
-.project-gh-link:hover { color: var(--accent); text-decoration: none; }
+
+/* When the card is an <a> tag, reset link styles so it looks like a card */
+a.project-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+a.project-card:hover { text-decoration: none; }
+a.project-card:hover .project-dest-label { color: var(--accent); }
 
 .project-desc {
   font-size: 0.875rem;

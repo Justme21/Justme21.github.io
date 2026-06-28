@@ -112,6 +112,8 @@ const SITE = {
                     code   →  GitHub or other repository
        bibtex   — citation in BibTeX format (shown/copied when reader clicks "BibTeX")
 
+     featured — true  → show on homepage  |  false → only on the full Publications page
+
      TO ADD A NEW PAPER:
        1. Copy any block below (from { to },)
        2. Paste it right after the opening  [  of the publications array
@@ -122,6 +124,7 @@ const SITE = {
 
     {
       id:      "geary2025computing",
+      featured: true,
       year:    2025,
       title:   "Computing Strategic Responses to Non-Linear Classifiers",
       authors: ["Jack Geary", "Boyan Gao", "Henry Gouk"],
@@ -148,6 +151,7 @@ const SITE = {
 
     {
       id:      "geary2025strategic",
+      featured: true,
       year:    2025,
       title:   "Strategic Classification with Randomised Classifiers",
       authors: ["Jack Geary", "Henry Gouk"],
@@ -178,6 +182,7 @@ const SITE = {
 
     {
       id:      "geary2021active",
+      featured: false,
       year:    2021,
       title:   "Active Altruism Learning and Information Sufficiency for Autonomous Driving",
       authors: ["Jack Geary", "Henry Gouk", "Subramanian Ramamoorthy"],
@@ -207,6 +212,7 @@ const SITE = {
 
     {
       id:      "geary2021resolving",
+      featured: true,
       year:    2021,
       title:   "Resolving Conflict in Decision-Making for Autonomous Driving",
       authors: ["Jack Geary", "Subramanian Ramamoorthy", "Henry Gouk"],
@@ -235,6 +241,7 @@ const SITE = {
 
     {
       id:      "geary2020altruistic",
+      featured: false,
       year:    2020,
       title:   "Altruistic Decision-Making for Autonomous Driving with Sparse Rewards",
       authors: ["Jack Geary", "Henry Gouk"],
@@ -277,15 +284,6 @@ const SITE = {
                to run new experiments without changing the codebase.`,
       tags:   ["Python", "Strategic Classification", "Game Theory"],
       github: "https://github.com/Justme21/strategic-classification-framework",
-      url:    "",
-    },
-    {
-      title:  "Altruistic Planning for Autonomous Driving",
-      desc:   `Simulation framework for game-theoretic decision making in multi-vehicle autonomous
-               driving scenarios. Implements the Augmented Altruism model from RSS 2021 and
-               active learning approaches for inferring driver intent from observed behaviour.`,
-      tags:   ["Python", "Game Theory", "Simulation"],
-      github: "https://github.com/Justme21/Altruistic-Planning",
       url:    "",
     },
     /* To add a project, copy a block above (from { to },) and paste it here */
