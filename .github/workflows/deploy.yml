@@ -1,118 +1,43 @@
 name: Deploy website to GitHub Pages
 
-env:
-  WC_HUGO_VERSION: '0.150.1'
-  NODE_VERSION: '20'
-
 on:
-  # Trigger the workflow every time you push to the `main` branch
+  # Run every time you push to main
   push:
     branches: ['main']
-  # Allows you to run this workflow manually from the Actions tab on GitHub
+  # Also allows manual trigger from the GitHub Actions tab
   workflow_dispatch:
 
-# Provide permission to clone the repo and deploy it to GitHub Pages
+# Permissions needed to deploy to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Only one deployment at a time; don't cancel an in-progress run
 concurrency:
   group: 'pages'
   cancel-in-progress: false
 
 jobs:
-  # Build website
-  build:
-    if: github.repository_owner != 'HugoBlox'
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-          # Fetch history for Hugo's .GitInfo and .Lastmod
-        fetch-depth: 0
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-
-    - name: Setup pnpm
-      if: hashFiles('package.json') != ''
-      uses: pnpm/action-setup@v4
-
-    - name: Install dependencies
-      run: |
-        # Install Tailwind CSS and other JS dependencies
-        if [ -f "package.json" ]; then
-          echo "Installing Tailwind dependencies..."
-          pnpm install || npm install
-        fi
-
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v3
-      with:
-        hugo-version: ${{ env.WC_HUGO_VERSION }}
-        # Extended edition required for Tailwind/CSS processing
-        extended: true
-
-      # Cache Go modules and node_modules — stable, rarely changes
-    - uses: actions/cache@v4
-      with:
-        path: |
-          /tmp/hugo_cache_runner/
-          node_modules/
-          modules/*/node_modules/
-        key: ${{ runner.os }}-hugo-deps-${{ hashFiles('**/go.mod', '**/package-lock.json',
-          '**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-hugo-deps-
-
-      # Cache Hugo resources (processed images, CSS) — invalidates when assets or config change
-    - uses: actions/cache@v4
-      with:
-        path: resources/
-        key: ${{ runner.os }}-hugo-resources-${{ hashFiles('assets/**/*', 'config/**/*',
-          'hugo.yaml', 'package.json') }}
-        restore-keys: |
-          ${{ runner.os }}-hugo-resources-
-
-    - name: Setup Pages
-      id: pages
-      uses: actions/configure-pages@v5
-
-    - name: Build with Hugo
-      env:
-        HUGO_ENVIRONMENT: production
-      run: |
-        echo "Hugo Cache Dir: $(hugo config | grep cachedir)"
-        hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
-
-    - name: Generate Pagefind search index
-      run: |
-        # Pagefind powers the search bar — only runs if package.json references it
-        if [ -f "package.json" ] && grep -q "pagefind" package.json; then
-          pnpm dlx pagefind --source "public" || npx pagefind --source "public"
-        fi
-
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v4
-      with:
-        path: ./public
-
-  # Deploy website to GitHub Pages hosting
   deploy:
-    if: github.repository_owner != 'HugoBlox'
-    needs: build
-    permissions:
-      pages: write
-      id-token: write
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+      # Check out the repository so the runner can see the files
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # The site lives in public/ — upload it as-is (no build step needed)
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: './public'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -6,9 +6,6 @@
 # Hugo Build Artifacts
 # ============================================================================
 
-# Generated site output
-public/
-
 # Hugo resources (processed assets)
 resources/
 
