@@ -1,98 +1,118 @@
 name: Deploy website to GitHub Pages
 
+env:
+  WC_HUGO_VERSION: '0.150.1'
+  NODE_VERSION: '20'
+
 on:
-  # Run every time you push to main
+  # Trigger the workflow every time you push to the `main` branch
   push:
     branches: ['main']
-  # Also allows you to trigger a build manually from the GitHub Actions tab
+  # Allows you to run this workflow manually from the Actions tab on GitHub
   workflow_dispatch:
 
-# Permissions needed to deploy to GitHub Pages
+# Provide permission to clone the repo and deploy it to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Only allow one deployment at a time; don't cancel an in-progress run
 concurrency:
   group: 'pages'
   cancel-in-progress: false
 
 jobs:
-
-  # ── Step 1: Build the site ─────────────────────────────────────────────────
-  # Hugo is a static site generator. It reads the content/ and config/ folders
-  # and produces a plain HTML/CSS/JS website in the public/ folder.
-  # We need Go (for Hugo's module system), Hugo itself, and Node/pnpm
-  # (for Tailwind CSS, which handles all the styling).
+  # Build website
   build:
+    if: github.repository_owner != 'HugoBlox'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          # Full git history is needed so Hugo can show page last-modified dates
-          fetch-depth: 0
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+          # Fetch history for Hugo's .GitInfo and .Lastmod
+        fetch-depth: 0
 
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          # Hugo uses Go's module system to download the HugoBlox theme
-          go-version: '1.21'
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
 
-      - name: Install Hugo (extended edition)
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: '0.150.1'
-          # "Extended" edition is required — it includes the CSS processor
-          # needed to compile Tailwind styles
-          extended: true
+    - name: Setup pnpm
+      if: hashFiles('package.json') != ''
+      uses: pnpm/action-setup@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
+    - name: Install dependencies
+      run: |
+        # Install Tailwind CSS and other JS dependencies
+        if [ -f "package.json" ]; then
+          echo "Installing Tailwind dependencies..."
+          pnpm install || npm install
+        fi
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'pnpm'
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v3
+      with:
+        hugo-version: ${{ env.WC_HUGO_VERSION }}
+        # Extended edition required for Tailwind/CSS processing
+        extended: true
 
-      - name: Install Node dependencies
-        # Downloads Tailwind and other JS packages listed in package.json
-        run: pnpm install
+      # Cache Go modules and node_modules — stable, rarely changes
+    - uses: actions/cache@v4
+      with:
+        path: |
+          /tmp/hugo_cache_runner/
+          node_modules/
+          modules/*/node_modules/
+        key: ${{ runner.os }}-hugo-deps-${{ hashFiles('**/go.mod', '**/package-lock.json',
+          '**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-hugo-deps-
 
-      - name: Build site with Hugo
-        # --gc    removes unused cache files after the build
-        # --minify compresses HTML/CSS/JS for faster page loads
-        run: hugo --gc --minify
-        env:
-          HUGO_ENABLEGITINFO: 'true'
+      # Cache Hugo resources (processed images, CSS) — invalidates when assets or config change
+    - uses: actions/cache@v4
+      with:
+        path: resources/
+        key: ${{ runner.os }}-hugo-resources-${{ hashFiles('assets/**/*', 'config/**/*',
+          'hugo.yaml', 'package.json') }}
+        restore-keys: |
+          ${{ runner.os }}-hugo-resources-
 
-      - name: Build search index
-        # Pagefind scans the built HTML and creates the search index
-        # that powers the search bar in the navbar
-        run: pnpm dlx pagefind --source 'public'
+    - name: Setup Pages
+      id: pages
+      uses: actions/configure-pages@v5
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
+    - name: Build with Hugo
+      env:
+        HUGO_ENVIRONMENT: production
+      run: |
+        echo "Hugo Cache Dir: $(hugo config | grep cachedir)"
+        hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
-      - name: Upload built site as Pages artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: './public'
+    - name: Generate Pagefind search index
+      run: |
+        # Pagefind powers the search bar — only runs if package.json references it
+        if [ -f "package.json" ] && grep -q "pagefind" package.json; then
+          pnpm dlx pagefind --source "public" || npx pagefind --source "public"
+        fi
 
-  # ── Step 2: Publish to GitHub Pages ───────────────────────────────────────
-  # This step takes the artifact uploaded above and makes it live.
-  # It only runs after the build job succeeds.
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v4
+      with:
+        path: ./public
+
+  # Deploy website to GitHub Pages hosting
   deploy:
+    if: github.repository_owner != 'HugoBlox'
     needs: build
-    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
