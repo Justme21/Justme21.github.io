@@ -123,6 +123,75 @@ const SITE = {
   publications: [
 
     {
+      id:      "geary2025nonlinear",
+      featured: true,
+      year:    2026,
+      title:   "Non-Linear Strategic Classification Made Practical",
+      authors: ["Jack Geary", "Boyan Gao", "Henry Gouk"],
+      myName:  "Jack Geary",
+      venue:   "Preprint · 2026",
+      abstract: `Algorithmic developments in Strategic Classification have been mostly limited to
+linear classifiers in settings where the best response has a closed-form solution
+or can be easily approximated. While some work has explored the role of non-
+linear classifiers in strategic settings, progress in this direction is impeded by the
+computational intractability of the strategic behaviour. Addressing this, we present
+a novel method for approximating the best response by exploiting Lagrangian
+duality. By reformulating the strategic response as a constrained optimisation
+problem, we can construct a Lagrangian that is amenable to first order optimisation
+methods. This approach reproduces closed-form strategic behaviour in linear
+settings and can be straight-forwardly applied to non-linear settings. We show
+how the Implicit Function Theorem can be used in conjunction with our proposed
+response formulation during classifier learning to compute the total gradient of the
+loss. This connects the classifier parameters directly to the consequent strategic
+behaviour, yielding a novel training algorithm that can exploit this relationship.
+Experimental evaluation shows that the resulting models achieve improved strategic
+accuracy on common machine learning datasets.`,
+      tags:  ["Strategic Classification", "Non-Linear Classifiers", "Game Theory"],
+      links: {
+        arxiv: "https://arxiv.org/abs/2606.28204",
+        pdf:   "",
+        code:  "https://github.com/Justme21/strategic-classification-framework",
+      },
+      bibtex: `@inproceedings{geary2026nonlinear,
+  title     = {Non-Linear Strategic Classification Made Practical},
+  author    = {Geary, Jack and Gao, Boyan and Gouk, Henry},
+  booktitle = {arXiv preprint arXiv:2606.28204},
+  year      = {2026}
+}`,
+    },
+
+    {
+      id:      "bomatter2026signal",
+      featured: false,
+      year:    2026,
+      title:   "The Signal in the Noise: OOD Detection Through Goodness-of-Fit Testing in Factorised Latent Spaces",
+      authors: ["Philipp Bomatter", "Jack Geary", "Henry Gouk"],
+      myName:  "Jack Geary",
+      venue:   "Preprint · 2026",
+      abstract: `Deep generative models offer a natural foundation for out-of-distribution (OOD) detection, yet prior work 
+      has shown that their assigned likelihoods are notoriously unreliable indicators for in- vs out-of-distribution data. 
+      In this paper, we address this problem by leveraging the diffeomorphic and mass-preserving properties of continuous
+      normalising flows. Our analysis shows that OOD samples are mapped to noise samples that are highly atypical under
+      the noise prior in ways not captured by the likelihood. Based on this observation, we propose a new method 
+      -- Signal in the Noise (SITN) -- for OOD detection on the single-sample level. SITN requires no access to
+      OOD data, incurs minimal computational overhead, and provides strict control of false positive rates.
+      Comprehensive evaluations through standard benchmarks and synthetic perturbations highlight the method's
+      effectiveness and the absence of the complexity bias inherent to likelihood-based methods.`,
+      tags:  ["Out of Distribution", "Normalising Flows", "Hypothesis Testing", "Goodness-of-Fit"],
+      links: {
+        arxiv: "https://arxiv.org/abs/2605.22496",
+        pdf:   "",
+        code:  "",
+      },
+      bibtex: `@article{bomatter2026signal,
+  title={The Signal in the Noise: OOD Detection Through Goodness-of-Fit Testing in Factorised Latent Spaces},
+  author={Bomatter, Philipp and Geary, Jack and Gouk, Henry},
+  journal={arXiv preprint arXiv:2605.22496},
+  year={2026}
+}`,
+    },
+
+    {
       id:      "geary2025computing",
       featured: true,
       year:    2025,
